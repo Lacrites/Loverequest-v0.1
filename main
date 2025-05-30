@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enviar Mensaje</title>
+  <style>
+    body { font-family: Arial; padding: 20px; text-align: center; }
+    textarea, button {
+      font-size: 18px; padding: 10px; margin: 10px; width: 90%;
+    }
+    #estado { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Decile a Fede 🐼</h1>
+  <textarea id="mensaje" placeholder="Escribí tu mensaje" rows="4"></textarea>
+  <button onclick="enviarMensaje()">Enviar</button>
+  <div id="estado">📬</div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxEhtyHETB2Hf-NmYdH-vKbFKc9dQy2LuGk3LQPlNss3zS6elCsULDjpeCaI62rrDJwzQ/exec";
+
+    function enviarMensaje() {
+      const mensaje = document.getElementById("mensaje").value.trim();
+      const estado = document.getElementById("estado");
+
+      if (!mensaje) {
+        estado.textContent = "Por favor escribí un mensaje.";
+        return;
+      }
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify({ mensaje }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.estado === "ok") {
+          estado.textContent = "Mensaje enviado con éxito 💌";
+          document.getElementById("mensaje").value = "";
+        } else {
+          estado.textContent = "Ocurrió un error. 😥";
+        }
+      })
+      .catch(() => estado.textContent = "No se pudo enviar el mensaje.");
+    }
+  </script>
+</body>
+</html>
