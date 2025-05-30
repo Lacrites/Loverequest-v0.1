@@ -48,7 +48,7 @@
 
   <script>
     // URL de tu Web App de Google Apps Script
-    const scriptURL = "TU_URL_DE_WEB_APP_ACÁ";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxEhtyHETB2Hf-NmYdH-vKbFKc9dQy2LuGk3LQPlNss3zS6elCsULDjpeCaI62rrDJwzQ/exec";
 
     const frases = [
       "te amo mucho muy muchisimo 💖",
